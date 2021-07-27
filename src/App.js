@@ -18,7 +18,11 @@ class App extends React.Component {
         </header>
         <main>
           <Calendar />
+
         </main>
+        <div className="side-bar">
+        <h2>Available Slots</h2>
+      </div>
       </div>
     );
   }

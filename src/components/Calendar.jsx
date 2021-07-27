@@ -1,11 +1,19 @@
 import React from "react";
 import dateFns from "date-fns";
+import "../App.css";
 
 class Calendar extends React.Component {
   state = {
     currentMonth: new Date(),
     selectedDate: new Date()
   };
+  openPopupHandler = () => {
+    this.setState({showPopup: true});
+  }
+  
+  closePopupHandler = () => {
+    this.setState({showPopup: false});
+  }
 
   renderHeader() {
     const dateFormat = "MMMM YYYY";
@@ -23,6 +31,7 @@ class Calendar extends React.Component {
         <div className="col col-end" onClick={this.nextMonth}>
           <div className="icon">chevron_right</div>
         </div>
+        <button onClick={() => this.addEmptyItem()}>How to Re-Enter:</button>
       </div>
     );
   }
@@ -72,8 +81,12 @@ class Calendar extends React.Component {
             key={day}
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
           >
+            <br></br>
+            <p className="event">avaliable</p>
+            <br></br>
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
+           
           </div>
         );
         day = dateFns.addDays(day, 1);
@@ -85,7 +98,7 @@ class Calendar extends React.Component {
       );
       days = [];
     }
-    return <div className="body">{rows}</div>;
+    return <div className="body"> {rows}</div>;
   }
 
   onDateClick = day => {
